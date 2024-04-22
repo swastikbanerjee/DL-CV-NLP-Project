@@ -23,6 +23,9 @@ import warnings
 warnings.filterwarnings("ignore")
 import streamlit as st
 import tempfile
+import numpy as np
+from PIL import Image, ImageEnhance, ImageOps, ImageFilter
+import cv2
 # nltk.download('stopwords')
 # nltk.download('punkt')
 # nltk.download('wordnet')
@@ -31,6 +34,56 @@ GOOGLE_API_KEY = "AIzaSyAy3EjjG0puD1quoYtmxkXPRQuz4RvtsPY"
 genai.configure(api_key=GOOGLE_API_KEY)
 modelG = genai.GenerativeModel('gemini-pro')
 
+def extract_frames(video_path, output_folder):
+    # Open the video file
+    cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        print("Error opening video file")
+        return
+    frame_count = 0
+    success = True
+    while success:
+        success, frame = cap.read()  # Read a frame from the video
+        if not success:
+            break
+        # Convert the frame to RGB format (PIL uses RGB)
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)     
+        # Create a PIL image from the frame array
+        pil_image = Image.fromarray(rgb_frame)
+        # Perform preprocessing steps
+        # Resize the image to a specific size (e.g., 256x256)
+        pil_image = pil_image.resize((256, 256))
+        # Convert the image to grayscale
+        pil_image = pil_image.convert('L')  # 'L' mode for grayscale    
+        # Enhance image contrast
+        enhancer = ImageEnhance.Contrast(pil_image)
+        pil_image = enhancer.enhance(1.5)  # Increase contrast by a factor of 1.5
+        # Add random operations for variety
+        # Example: Apply random cropping
+        crop_size = np.random.randint(200, 256)  # Random crop size between 200x200 and 256x256
+        left = np.random.randint(0, 256 - crop_size)  # Random left coordinate for cropping
+        top = np.random.randint(0, 256 - crop_size)  # Random top coordinate for cropping
+        pil_image = pil_image.crop((left, top, left + crop_size, top + crop_size))  # Perform cropping
+        # Apply edge detection filter
+        if np.random.rand() < 0.3:  # Randomly apply edge detection with 30% probability
+            pil_image = pil_image.filter(ImageFilter.FIND_EDGES)
+        # Apply custom filter (e.g., invert colors)
+        if np.random.rand() < 0.2:  # Randomly apply custom filter with 20% probability
+            pil_image = ImageOps.invert(pil_image)
+        # Save the processed PIL image
+        output_file = f"{output_folder}/frame_{frame_count:04d}.png"
+        pil_image.save(output_file)
+        frame_count += 1
+    cap.release()  # Release the video capture object
+    print(f"Extracted {frame_count} frames from the video")
+
+if _name_ == "_main_":
+    video_file = "input_video.mp4"
+    output_folder = "output_frames"
+    # Create output folder if it doesn't exist
+    os.makedirs(output_folder, exist_ok=True)
+    # Extract frames from the video
+    extract_frames(video_file, output_folder)
 
 # Function to convert audio to transcript using SpeechRecognition
 def convert_audio_to_transcript(audio_path):
