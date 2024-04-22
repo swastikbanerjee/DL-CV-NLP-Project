@@ -357,20 +357,35 @@ def process_input(input_data, val='Beige'):
         analysis,
         'temp_WC.png',]
 
-    if val == 'Beige':
-        template = r"C:\Users\rickyswas\OneDrive\Desktop\template_beige.pptx"
+    if val == 'Simple Beige':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_beige.pptx"
         fill_ppt_placeholders(template, arr)
-    elif val == 'Green':
-        template = "template_green.pptx"
+    elif val == 'Grass Green':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_green.pptx"
         fill_ppt_placeholders(template, arr)
-    elif val == 'Blue':
-        template = "template_blue.pptx"
+    elif val == 'Corporate Blue':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_blue.pptx"
         fill_ppt_placeholders(template, arr)
-    elif val == 'Grey':
-        template = "template_grey.pptx"
+    elif val == 'Bare Gray':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_grey.pptx"
         fill_ppt_placeholders(template, arr)
-    elif val == 'Red':
-        template = "template_red.pptx"
+    elif val == 'Ruby Red':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_red.pptx"
+        fill_ppt_placeholders(template, arr)
+    elif val == 'Warm Beige':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_beiges.pptx"
+        fill_ppt_placeholders(template, arr)
+    elif val == 'Gilded Gold':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_gold.pptx"
+        fill_ppt_placeholders(template, arr)
+    elif val == 'Minimalist Grey':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_gray.pptx"
+        fill_ppt_placeholders(template, arr)
+    elif val == 'Sage Green':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_sage.pptx"
+        fill_ppt_placeholders(template, arr)
+    elif val == 'Ocean Blue':
+        template = r"C:\Users\rickyswas\Downloads\ppt_templates\template_sky.pptx"
         fill_ppt_placeholders(template, arr)
     else:
         print("Select proper template")
@@ -380,7 +395,7 @@ st.title("Preach: Input to PPT Generator")
 def main():
     # Input file uploader
     uploaded_file = st.file_uploader("Upload file", type=["mp4", "wav", "txt"])
-    option = st.selectbox('Select PPT style',('Beige', 'Green', 'Blue', 'Grey', 'Red'))
+    option = st.selectbox('Select PPT style',('Simple Beige', 'Grass Green', 'Corporate Blue', 'Bare Gray', 'Ruby Red','Warm Beige','Gilded Gold','Minimalist Grey','Sage Green','Ocean Blue'))
     if st.button('Submit'):
         if uploaded_file is not None:
             # Process input and generate PPT
