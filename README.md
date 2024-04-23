@@ -29,6 +29,9 @@ Our project isn't just about creating any old PowerPoint; it's about infusing yo
 
 ![EXQUISITE PALETTE](https://github.com/swastikbanerjee/PREACH/assets/108891810/42978a9c-01f6-41f4-acbf-9ea011851356)
 
+# Process Flowchart 🐬
+
+![Flowchart](https://github.com/swastikbanerjee/DL-CV-NLP-Project/assets/139948303/cfa28767-f65e-47ac-bb53-237df66367aa)
 
 ---
 
