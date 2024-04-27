@@ -30,7 +30,7 @@ import cv2
 # nltk.download('punkt')
 # nltk.download('wordnet')
 
-GOOGLE_API_KEY = "AIzaSyAy3EjjG0puD1quoYtmxkXPRQuz4RvtsPY"
+GOOGLE_API_KEY = #GOOGLE_API_KEY_PERSONAL
 genai.configure(api_key=GOOGLE_API_KEY)
 modelG = genai.GenerativeModel('gemini-pro')
 
